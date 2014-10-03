@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+'use strict';
+
+var fs = require('fs');
+var path = require('path');
+
+var vidya = path.join(__dirname, '..', 'webm', 'meatacle.webm');
+var output = path.join(__dirname, '..', 'webm', 'meatacle.txt');
+fs.readFile(vidya, function (err, data) {
+  if (err) { return new Error(err); }
+  data = 'data:video/webm;base64,' + new Buffer(data).toString('base64');
+  fs.writeFile(output, data, function (err) {
+    if (err) { return new Error(err); }
+    console.log('Wahoo');
+  });
+});
